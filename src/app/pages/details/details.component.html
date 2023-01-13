@@ -1,10 +1,20 @@
 <div class="card" *ngIf="todo">
-  <div class="card-header fw-bold">UserId {{ todo.userId }}</div>
+  <div class="card-header fw-bold fs-3">UserId {{ todo.userId }}</div>
   <div class="card-body">
     <h5 class="card-title">
       Titulo: <span class="text-primary">{{ todo.title }}</span>
     </h5>
-    <p>Id todo: {{ todo.id }}</p>
+    <div class="d-flex align-items-center gap-2">
+      <h5>Estado:</h5>
+      <span
+        class="badge"
+        [ngClass]="todo.completed ? 'text-bg-success' : 'text-bg-danger'"
+      >
+        {{ todo.completed ? "Completo" : "Incompleto" }}
+      </span>
+    </div>
+
+    <h5>Id todo: {{ todo.id }}</h5>
     <button class="btn btn-primary" (click)="goBack()">Volver Atrás</button>
   </div>
 </div>
