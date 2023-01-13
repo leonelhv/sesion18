@@ -13,4 +13,7 @@ export class DataService {
   getAll(): Observable<todo[]> {
     return this.http.get<todo[]>(this.URL);
   }
+  getDetail(id: string): Observable<todo> {
+    return this.http.get<todo>(`${this.URL}/${id}`);
+  }
 }
