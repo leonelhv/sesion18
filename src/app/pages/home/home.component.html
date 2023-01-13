@@ -1,16 +1,21 @@
-<table class="table">
+<table
+  datatable
+  [dtOptions]="dtOptions"
+  class="table table-striped"
+  [dtTrigger]="dtTrigger"
+>
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Titulo</th>
-      <th scope="col">Detalles</th>
+      <th>#IdUser</th>
+      <th>Titulo</th>
+      <th class="text-center">Detalles</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let todo of todos$ | async">
-      <th scope="row">{{ todo.userId }}</th>
+    <tr *ngFor="let todo of dtTrigger | async">
+      <td>{{ todo.userId }}</td>
       <td>{{ todo.title }}</td>
-      <td>
+      <td class="py-2 d-flex justify-content-center">
         <button [routerLink]="['details', todo.id]" class="btn btn-primary">
           Ver detalles
         </button>

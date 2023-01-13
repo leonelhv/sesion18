@@ -1,17 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit {
-  todos$!: Observable<any>;
+export class HomeComponent implements OnInit, OnDestroy {
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
 
   constructor(public dataService: DataService) {}
 
   ngOnInit(): void {
-    this.todos$ = this.dataService.getAll();
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+    };
+
+    this.dataService.getAll().subscribe((data) => {
+      this.dtTrigger.next(data);
+    });
+  }
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
   }
 }
