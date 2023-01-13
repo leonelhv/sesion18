@@ -1,7 +1,10 @@
 <div class="card" *ngIf="todo">
-  <div class="card-header">User {{ todo.userId }}</div>
+  <div class="card-header fw-bold">UserId {{ todo.userId }}</div>
   <div class="card-body">
-    <h5 class="card-title">{{ todo.title }}</h5>
+    <h5 class="card-title">
+      Titulo: <span class="text-primary">{{ todo.title }}</span>
+    </h5>
     <p>Id todo: {{ todo.id }}</p>
+    <button class="btn btn-primary" (click)="goBack()">Volver Atrás</button>
   </div>
 </div>

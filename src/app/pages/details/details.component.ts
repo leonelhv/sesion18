@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { todo } from 'src/app/interfaces/todo.interface';
 import { Observable } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
@@ -12,6 +12,7 @@ export class DetailsComponent implements OnInit {
   todo!: todo;
   id!: string;
   constructor(
+    private router: Router,
     public routeActive: ActivatedRoute,
     public dataService: DataService
   ) {}
@@ -23,5 +24,8 @@ export class DetailsComponent implements OnInit {
     this.dataService.getDetail(this.id).subscribe((res) => {
       this.todo = res;
     });
+  }
+  goBack() {
+    this.router.navigate(['/']);
   }
 }
