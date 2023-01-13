@@ -10,9 +10,20 @@ export class DataService {
   private URL = 'https://jsonplaceholder.typicode.com/todos';
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<todo[]> {
-    return this.http.get<todo[]>(this.URL);
+  getAll(): Observable<Partial<todo>[]> {
+    return this.http
+      .get<todo[]>(this.URL)
+      .pipe(
+        map((todos) =>
+          todos.map((todo) => ({
+            userId: todo.userId,
+            id: todo.id,
+            title: todo.title,
+          }))
+        )
+      );
   }
+
   getDetail(id: string): Observable<todo> {
     return this.http.get<todo>(`${this.URL}/${id}`);
   }
